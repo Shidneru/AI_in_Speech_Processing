@@ -22,9 +22,6 @@ from IPython.display import Audio
 
 org=Audio(data=y, rate=sr)
 
-
-# In[2]:
-
 # Display the first derivative waveform
 
 import numpy as np
@@ -36,17 +33,9 @@ for i in range (1,len(y)):
 print(First_derivative)
 librosa.display.waveshow(First_derivative)
 
-
-# In[3]:
-
-
 Audio(data=First_derivative, rate=sr)
 
-
-# In[4]:
-
 # Calculate and display the delta feature (first derivative) using Librosa
-
 plt.subplot(2, 1, 1)
 librosa.display.waveshow(y, sr=sr)
 plt.title('Original Waveform')
@@ -78,7 +67,7 @@ silence_intervals = crossing_intervals[crossing_intervals <= speech_threshold]
 
 avg_speech_length = np.mean(speech_intervals)
 avg_silence_length = np.mean(silence_intervals)
-
+# printing lengths of zero crossings :  speech and silence ones
 print(f'Average Length between Consecutive Zero Crossings (Speech): {avg_speech_length:.4f} seconds')
 print(f'Average Length between Consecutive Zero Crossings (Silence): {avg_silence_length:.4f} seconds')
 
@@ -93,8 +82,7 @@ plt.figure(figsize=(10, 6))
 plt.vlines(librosa.frames_to_time(np.where(speech_intervals)),1,-1, alpha=0.5)
 plt.vlines(librosa.frames_to_time(np.where(silence_intervals)),1,-1,color = "cyan", alpha=0.5)
 
-
-
+# analyzing zero crossings between vertical lines
 plt.title('Vertical Lines for Intervals between Consecutive Zero Crossings')
 plt.xlabel('Time (seconds)')
 plt.ylabel('Amplitude')
@@ -160,14 +148,14 @@ plt.show()
 duration = librosa.get_duration(y=y, sr=sr)
 print(f'Duration of your speech signal: {duration} seconds')
 y_team, sr_team = librosa.load("ques.wav")
-
+#teammates signal waveform
 plt.figure(figsize=(12, 4))
 librosa.display.waveshow(y_team, sr=sr_team)
 plt.title('Waveform of Teammate\'s Speech Signal')
 plt.xlabel('Time')
 plt.ylabel('Amplitude')
 plt.show()
-
+#speech signal plot of teammate
 duration_teammate = librosa.get_duration(y=y_team, sr=sr_team)
 print(f'Duration of your project team-mate\'s speech signal: {duration_teammate} seconds')
 
