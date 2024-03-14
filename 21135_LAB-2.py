@@ -25,6 +25,7 @@ org=Audio(data=y, rate=sr)
 
 # In[2]:
 
+# Display the first derivative waveform
 
 import numpy as np
  
@@ -44,6 +45,7 @@ Audio(data=First_derivative, rate=sr)
 
 # In[4]:
 
+# Calculate and display the delta feature (first derivative) using Librosa
 
 plt.subplot(2, 1, 1)
 librosa.display.waveshow(y, sr=sr)
@@ -62,6 +64,7 @@ Audio(data=y_with_deri, rate=sr)
 
 # In[5]:
 
+# Analyze zero crossings for speech and silence intervals
 
 import numpy as np
 zero_cros=librosa.zero_crossings(delta, pad=False)
@@ -102,13 +105,13 @@ plt.show()
 
 # In[7]:
 
-
 import librosa
 import librosa.display
 import matplotlib.pyplot as plt
 import numpy as np
 import sounddevice as sd
 
+# Teammates signal
 
 y, sr = librosa.load("Vishwash1.opus")
 plt.figure(figsize=(12, 4))
@@ -120,6 +123,9 @@ plt.show()
 
 duration = librosa.get_duration(y=y, sr=sr)
 print(f'Duration of your speech signal: {duration} seconds')
+
+# My signal
+
 y_team, sr_team = librosa.load("words.wav")
 
 plt.figure(figsize=(12, 4))
@@ -142,7 +148,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import sounddevice as sd
 
-
+#  the statement and asking question
 y, sr = librosa.load("state.wav")
 plt.figure(figsize=(12, 4))
 librosa.display.waveshow(y, sr=sr)
