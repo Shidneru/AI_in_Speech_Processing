@@ -3,20 +3,13 @@
 
 # # V. SAI SHRUTHIK(BL.EN.U4AIE21135)
 
-# In[1]:
-
+# Making recording ready to use
 
 import librosa
 from IPython.display import Audio
 
-
 y, sr = librosa.load("wavtrial.wav")
 Audio(data=y, rate=sr)
-
-
-# In[2]:
-
-
 librosa.get_duration(y=y, sr=sr)
 
 
@@ -75,7 +68,7 @@ import matplotlib.pyplot as plt
 
 sections = librosa.effects.split(y, top_db=10)
 
-# Plot the split signal
+# Plot the split signal with deb=10
 plt.figure(figsize=(12, 6))
 librosa.display.waveshow(y, sr=sr, alpha=0.5, color="red")
 for i, section in enumerate(sections):
@@ -92,7 +85,7 @@ plt.show()
 
 sections = librosa.effects.split(y, top_db=3)
 
-# Plot the split signal
+# Plot the split signal with topdb = 3
 plt.figure(figsize=(12, 6))
 librosa.display.waveshow(y, sr=sr, alpha=0.5, color="red")
 for i, section in enumerate(sections):
@@ -162,7 +155,7 @@ zero_crossings = librosa.zero_crossings(Em_arr, pad=False)
 
 # In[20]:
 
-
+#plot the signal
 import matplotlib.pyplot as plt
 
 plt.figure(figsize=(14, 5))
@@ -172,7 +165,7 @@ plt.title('Continuos average energy')
 plt.xlabel('Time')
 plt.ylabel('Amplitude')
 
-# Plot the zero crossings
+# Plot the zero crossings with sampled index
 plt.subplot(2, 1, 2)
 plt.plot(zero_crossings, color='r')
 plt.title('Zero Crossings')
@@ -189,15 +182,12 @@ zero_crossings_Energy = np.where(np.diff(np.sign(Em_arr)))[0]
 lobe_maxima_indices = []
 lobe_boundaries = []
 
+# loop to follow the zero crossing variables
 for i in range(len(zero_crossings_Energy) - 1):
     lobe_start = zero_crossings_Energy[i]
     lobe_end = zero_crossings_Energy[i + 1]
-    
-
     lobe_max_index = lobe_start + np.argmax(Em_arr[lobe_start:lobe_end])
-    
     lobe_maxima_indices.append(lobe_max_index)
-    
     lobe_boundaries.append((lobe_start, lobe_end))
 
 plt.figure(figsize=(10, 6))
@@ -206,12 +196,13 @@ librosa.display.waveshow(y, sr=sr, alpha=0.5, color="blue")
 lobe_maxima_times = librosa.samples_to_time(lobe_maxima_indices, sr=sr)
 lobe_boundaries_times = librosa.samples_to_time(np.array(lobe_boundaries).flatten(), sr=sr)
 
-plt.scatter(lobe_maxima_times, y[lobe_maxima_indices], color='r', label='Lobe Maxima')
+plt.scatter(lobe_maxima_times, y[lobe_maxima_indices], color='r', label='Lobe Maxima') #scatter plot for zero crossings
 
 for start, end in zip(lobe_boundaries_times[::2], lobe_boundaries_times[1::2]):
     plt.axvline(x=start, color='g', linestyle='--', alpha=0.5)
     plt.axvline(x=end, color='g', linestyle='--', alpha=0.5)
 
+#plot with boundaries inclusion
 plt.title('Audio Signal with Lobe Maxima and Boundaries')
 plt.xlabel('Time (s)')
 plt.ylabel('Amplitude')
